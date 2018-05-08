@@ -1,1 +1,116 @@
-!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports,require("@angular/core"),require("rxjs/Subject"),require("rxjs/operators"),require("@angular/common")):"function"==typeof define&&define.amd?define("isban",["exports","@angular/core","rxjs/Subject","rxjs/operators","@angular/common"],e):e(t.isban={},t.ng.core,t.Rx,t.Rx.Observable.prototype,t.ng.common)}(this,function(t,e,r,o,n){"use strict";var i=function(){function t(){this.delayNextClick=500,this.outputClick=new e.EventEmitter,this.clicks=new r.Subject}return t.prototype.ngOnInit=function(){var e=this;this.subscription=this.clicks.pipe(o.throttleTime(this.delayNextClick)).subscribe(function(t){e.outputClick.emit(t)})},t.prototype.ngOnDestroy=function(){this.subscription.unsubscribe()},t.prototype.clickEvent=function(t){t.preventDefault(),t.stopPropagation(),this.clicks.next(t)},t}();i.decorators=[{type:e.Directive,args:[{selector:"[appControlClick]"}]}],i.ctorParameters=function(){return[]},i.propDecorators={delayNextClick:[{type:e.Input}],outputClick:[{type:e.Output}],clickEvent:[{type:e.HostListener,args:["click",["$event"]]}]};var c=function(){};c.decorators=[{type:e.NgModule,args:[{imports:[n.CommonModule],exports:[i],declarations:[i]}]}],c.ctorParameters=function(){return[]};var s=function(){function t(){}return t.prototype.transform=function(t,e){return t&&t.length?e?t.filter(function(t){return 0<=t.indexOf(e)}):t:[]},t}();s.decorators=[{type:e.Pipe,args:[{name:"filterByString"}]}],s.ctorParameters=function(){return[]};var u=function(){};u.decorators=[{type:e.NgModule,args:[{imports:[n.CommonModule],exports:[s],declarations:[s]}]}],u.ctorParameters=function(){return[]};var a=function(){};a.decorators=[{type:e.Component,args:[{selector:"app-footer",template:"<h3>Soy el footer</h3>",styles:["h3{color:red}"]}]}],a.ctorParameters=function(){return[]};var p=function(){};p.decorators=[{type:e.NgModule,args:[{imports:[n.CommonModule],exports:[a],declarations:[a]}]}],p.ctorParameters=function(){return[]},t.ControlClickDirectiveModule=c,t.FilterByStringPipeModule=u,t.FooterComponentModule=p,t.ɵc=a,t.ɵa=i,t.ɵb=s,Object.defineProperty(t,"__esModule",{value:!0})});
+import { Directive, Input, Output, EventEmitter, HostListener, NgModule, Pipe, Component } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import { throttleTime } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
+
+var ControlClickDirective = /** @class */ (function () {
+    function ControlClickDirective() {
+        this.delayNextClick = 500;
+        this.outputClick = new EventEmitter();
+        this.clicks = new Subject();
+    }
+    ControlClickDirective.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscription = this.clicks.pipe(throttleTime(this.delayNextClick)).subscribe(function (e) {
+            _this.outputClick.emit(e);
+        });
+    };
+    ControlClickDirective.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
+    };
+    ControlClickDirective.prototype.clickEvent = function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.clicks.next(event);
+    };
+    return ControlClickDirective;
+}());
+ControlClickDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[appControlClick]'
+            },] },
+];
+ControlClickDirective.ctorParameters = function () { return []; };
+ControlClickDirective.propDecorators = {
+    "delayNextClick": [{ type: Input },],
+    "outputClick": [{ type: Output },],
+    "clickEvent": [{ type: HostListener, args: ['click', ['$event'],] },],
+};
+var ControlClickDirectiveModule = /** @class */ (function () {
+    function ControlClickDirectiveModule() {
+    }
+    return ControlClickDirectiveModule;
+}());
+ControlClickDirectiveModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule
+                ],
+                exports: [ControlClickDirective],
+                declarations: [ControlClickDirective]
+            },] },
+];
+ControlClickDirectiveModule.ctorParameters = function () { return []; };
+var FilterByStringPipe = /** @class */ (function () {
+    function FilterByStringPipe() {
+    }
+    FilterByStringPipe.prototype.transform = function (values, filter) {
+        if (!values || !values.length) {
+            return [];
+        }
+        if (!filter) {
+            return values;
+        }
+        return values.filter(function (v) { return v.indexOf(filter) >= 0; });
+    };
+    return FilterByStringPipe;
+}());
+FilterByStringPipe.decorators = [
+    { type: Pipe, args: [{ name: 'filterByString' },] },
+];
+FilterByStringPipe.ctorParameters = function () { return []; };
+var FilterByStringPipeModule = /** @class */ (function () {
+    function FilterByStringPipeModule() {
+    }
+    return FilterByStringPipeModule;
+}());
+FilterByStringPipeModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule
+                ],
+                exports: [FilterByStringPipe],
+                declarations: [FilterByStringPipe]
+            },] },
+];
+FilterByStringPipeModule.ctorParameters = function () { return []; };
+var FooterComponent = /** @class */ (function () {
+    function FooterComponent() {
+    }
+    return FooterComponent;
+}());
+FooterComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'app-footer',
+                template: "<h3>Soy el footer</h3>",
+                styles: ["h3{color:red}"]
+            },] },
+];
+FooterComponent.ctorParameters = function () { return []; };
+var FooterComponentModule = /** @class */ (function () {
+    function FooterComponentModule() {
+    }
+    return FooterComponentModule;
+}());
+FooterComponentModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule
+                ],
+                exports: [FooterComponent],
+                declarations: [FooterComponent]
+            },] },
+];
+FooterComponentModule.ctorParameters = function () { return []; };
+
+export { ControlClickDirectiveModule, FilterByStringPipeModule, FooterComponentModule, FooterComponent as ɵc, ControlClickDirective as ɵa, FilterByStringPipe as ɵb };
