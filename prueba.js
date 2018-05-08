@@ -1,1 +1,1 @@
-{"name":"Pedro","surName":"Castillo"}
+var pedro = {"name":"Pedro","surName":"Castillo"}
