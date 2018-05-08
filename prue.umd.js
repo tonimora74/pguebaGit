@@ -1,162 +1,126 @@
-import { Directive, Input, Output, EventEmitter, HostListener, NgModule, Pipe, Component } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { throttleTime } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs/Subject'), require('rxjs/operators'), require('@angular/common')) :
+	typeof define === 'function' && define.amd ? define('isban', ['exports', '@angular/core', 'rxjs/Subject', 'rxjs/operators', '@angular/common'], factory) :
+	(factory((global.isban = {}),global.ng.core,global.Rx,global.Rx.Observable.prototype,global.ng.common));
+}(this, (function (exports,core,Subject,operators,common) { 'use strict';
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class ControlClickDirective {
-    constructor() {
+var ControlClickDirective = /** @class */ (function () {
+    function ControlClickDirective() {
         this.delayNextClick = 500;
-        this.outputClick = new EventEmitter();
-        this.clicks = new Subject();
+        this.outputClick = new core.EventEmitter();
+        this.clicks = new Subject.Subject();
     }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.subscription = this.clicks.pipe(throttleTime(this.delayNextClick)).subscribe(e => {
-            this.outputClick.emit(e);
+    ControlClickDirective.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscription = this.clicks.pipe(operators.throttleTime(this.delayNextClick)).subscribe(function (e) {
+            _this.outputClick.emit(e);
         });
-    }
-    /**
-     * @return {?}
-     */
-    ngOnDestroy() {
+    };
+    ControlClickDirective.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();
-    }
-    /**
-     * @param {?} event
-     * @return {?}
-     */
-    clickEvent(event) {
+    };
+    ControlClickDirective.prototype.clickEvent = function (event) {
         event.preventDefault();
         event.stopPropagation();
         this.clicks.next(event);
-    }
-}
+    };
+    return ControlClickDirective;
+}());
 ControlClickDirective.decorators = [
-    { type: Directive, args: [{
+    { type: core.Directive, args: [{
                 selector: '[appControlClick]'
             },] },
 ];
-/** @nocollapse */
-ControlClickDirective.ctorParameters = () => [];
+ControlClickDirective.ctorParameters = function () { return []; };
 ControlClickDirective.propDecorators = {
-    "delayNextClick": [{ type: Input },],
-    "outputClick": [{ type: Output },],
-    "clickEvent": [{ type: HostListener, args: ['click', ['$event'],] },],
+    "delayNextClick": [{ type: core.Input },],
+    "outputClick": [{ type: core.Output },],
+    "clickEvent": [{ type: core.HostListener, args: ['click', ['$event'],] },],
 };
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class ControlClickDirectiveModule {
-}
+var ControlClickDirectiveModule = /** @class */ (function () {
+    function ControlClickDirectiveModule() {
+    }
+    return ControlClickDirectiveModule;
+}());
 ControlClickDirectiveModule.decorators = [
-    { type: NgModule, args: [{
+    { type: core.NgModule, args: [{
                 imports: [
-                    CommonModule
+                    common.CommonModule
                 ],
                 exports: [ControlClickDirective],
                 declarations: [ControlClickDirective]
             },] },
 ];
-/** @nocollapse */
-ControlClickDirectiveModule.ctorParameters = () => [];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class FilterByStringPipe {
-    /**
-     * @param {?} values
-     * @param {?} filter
-     * @return {?}
-     */
-    transform(values, filter) {
+ControlClickDirectiveModule.ctorParameters = function () { return []; };
+var FilterByStringPipe = /** @class */ (function () {
+    function FilterByStringPipe() {
+    }
+    FilterByStringPipe.prototype.transform = function (values, filter) {
         if (!values || !values.length) {
             return [];
         }
         if (!filter) {
             return values;
         }
-        return values.filter(v => v.indexOf(filter) >= 0);
-    }
-}
+        return values.filter(function (v) { return v.indexOf(filter) >= 0; });
+    };
+    return FilterByStringPipe;
+}());
 FilterByStringPipe.decorators = [
-    { type: Pipe, args: [{ name: 'filterByString' },] },
+    { type: core.Pipe, args: [{ name: 'filterByString' },] },
 ];
-/** @nocollapse */
-FilterByStringPipe.ctorParameters = () => [];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class FilterByStringPipeModule {
-}
+FilterByStringPipe.ctorParameters = function () { return []; };
+var FilterByStringPipeModule = /** @class */ (function () {
+    function FilterByStringPipeModule() {
+    }
+    return FilterByStringPipeModule;
+}());
 FilterByStringPipeModule.decorators = [
-    { type: NgModule, args: [{
+    { type: core.NgModule, args: [{
                 imports: [
-                    CommonModule
+                    common.CommonModule
                 ],
                 exports: [FilterByStringPipe],
                 declarations: [FilterByStringPipe]
             },] },
 ];
-/** @nocollapse */
-FilterByStringPipeModule.ctorParameters = () => [];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class FooterComponent {
-}
+FilterByStringPipeModule.ctorParameters = function () { return []; };
+var FooterComponent = /** @class */ (function () {
+    function FooterComponent() {
+    }
+    return FooterComponent;
+}());
 FooterComponent.decorators = [
-    { type: Component, args: [{
+    { type: core.Component, args: [{
                 selector: 'app-footer',
-                template: `<h3>Soy el footer</h3>`,
-                styles: [`h3{color:red}`]
+                template: "<h3>Soy el footer</h3>",
+                styles: ["h3{color:red}"]
             },] },
 ];
-/** @nocollapse */
-FooterComponent.ctorParameters = () => [];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-class FooterComponentModule {
-}
+FooterComponent.ctorParameters = function () { return []; };
+var FooterComponentModule = /** @class */ (function () {
+    function FooterComponentModule() {
+    }
+    return FooterComponentModule;
+}());
 FooterComponentModule.decorators = [
-    { type: NgModule, args: [{
+    { type: core.NgModule, args: [{
                 imports: [
-                    CommonModule
+                    common.CommonModule
                 ],
                 exports: [FooterComponent],
                 declarations: [FooterComponent]
             },] },
 ];
-/** @nocollapse */
-FooterComponentModule.ctorParameters = () => [];
+FooterComponentModule.ctorParameters = function () { return []; };
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
+exports.ControlClickDirectiveModule = ControlClickDirectiveModule;
+exports.FilterByStringPipeModule = FilterByStringPipeModule;
+exports.FooterComponentModule = FooterComponentModule;
+exports.ɵc = FooterComponent;
+exports.ɵa = ControlClickDirective;
+exports.ɵb = FilterByStringPipe;
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * Generated bundle index. Do not edit.
- */
+Object.defineProperty(exports, '__esModule', { value: true });
 
-export { ControlClickDirectiveModule, FilterByStringPipeModule, FooterComponentModule, FooterComponent as ɵc, ControlClickDirective as ɵa, FilterByStringPipe as ɵb };
+})));
